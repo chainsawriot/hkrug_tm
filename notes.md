@@ -48,7 +48,7 @@ Frequency vector: {the: 2, quick: 1, brown: 1, fox: 1, jumps: 1, over: 1, lazy: 
 
 # Microtask #1: find all unique tokens in letitgo.txt
 
-Unix wizardary can do it this way:
+Unix wizardry can do it this way:
 
 ```{bash}
 tr '[:upper:]' '[:lower:]' < letitgo.txt | tr -d "'" |tr -c '[:alnum:]' '[\n*]' | sort | uniq -c | sort -nr
@@ -56,3 +56,23 @@ tr '[:upper:]' '[:lower:]' < letitgo.txt | tr -d "'" |tr -c '[:alnum:]' '[\n*]' 
 
 But this is not Hong Kong Linux User Group.
 
+# Basic text manipulation
+
+```{r}
+readLines("letitgo.txt")
+letitgo <- readLines("letitgo.txt")
+tolower(letitgo) # tolower
+letitgo2 <- gsub("[[:punct:]]", "", tolower(letitgo)) #remove punctuation
+# tokenization
+strsplit(letitgo2, " ") # split text by space
+unlist(strsplit(letitgo2, " "))
+# unique tokens
+unique(unlist(strsplit(letitgo2, " ")))
+sort(unique(unlist(strsplit(letitgo2, " "))))
+# BONUS: word frequency
+table(unlist(strsplit(letitgo2, " ")))
+sort(table(unlist(strsplit(letitgo2, " "))))
+# even more BONUS: the use of magrittr
+require(magrittr)
+letitgo2 %>% strsplit(split= " ") %>% unlist %>% table %>% sort
+```
