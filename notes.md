@@ -17,6 +17,8 @@ Simpliest model: Bag-of-words (BoW)
 
 # Example
 
+letitgo.txt
+
 ```
 let it go, let it go
 can't hold it back anymore
@@ -32,7 +34,11 @@ the cold never bothered me anyway
 
 Smallest unit of analysis. In this case: word
 
+# Example
+
+```
 the quick brown fox jumps over the lazy dog
+```
 
 Tokenized version: {the,quick,brown,fox,jumps,over,the,lazy,dog}
 
@@ -40,5 +46,13 @@ Unique tokens: {the,quick,brown,fox,jumps,over,lazy,dog}
 
 Frequency vector: {the: 2, quick: 1, brown: 1, fox: 1, jumps: 1, over: 1, lazy: 1, dog: 1}
 
+# Microtask #1: find all unique tokens in letitgo.txt
 
+Unix wizardary can do it this way:
+
+```{bash}
+tr '[:upper:]' '[:lower:]' < letitgo.txt | tr -d "'" |tr -c '[:alnum:]' '[\n*]' | sort | uniq -c | sort -nr
+```
+
+But this is not Hong Kong Linux User Group.
 

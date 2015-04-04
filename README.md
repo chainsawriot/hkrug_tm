@@ -2,7 +2,7 @@
 
 Hong Kong R User Group Pre-hackathon workshop on Text Mining.
 
-This pre-hackathon is designed for those who want to get their hands dirty and really want to do something. This is not a chit-chat session (in cantonese 吹水). YOU NEED TO CODE DURING THE WORKSHOP.
+This pre-hackathon is designed for those who want to get their hands dirty to build something. This is not a chit-chat session (in cantonese 吹水). YOU NEED TO CODE DURING THE WORKSHOP.
 
 # prerequsite
 
@@ -16,7 +16,6 @@ kmeans(iris[,1:4], 3)
 kmeans(iris[,1:4], 3)$cluster
 table(kmeans(iris[,1:4], 3)$cluster, iris[,5])
 ```
-
 
 # preparation
 
