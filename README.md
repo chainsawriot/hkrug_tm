@@ -22,6 +22,6 @@ table(kmeans(iris[,1:4], 3)$cluster, iris[,5])
 You should be running R > 3.0 and your preferred editor. (RStudio/emacs/vim/sublime) Please install the required R packages
 
 ```{r}
-install.packages(c("tm", "stringr", "plyr", "topicmodels", "snowballC"))
+install.packages(c("tm", "stringr", "plyr", "topicmodels", "snowballC", "magrittr"))
 ```
 

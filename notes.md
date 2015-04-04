@@ -11,11 +11,11 @@ Getting meaningful information from unstructured text
 5. evaluation
 6. go back to 1-5
 
-# representation of unstructured text in structured data structure
+# representation of unstructured text in a structured data structure
 
 Simpliest model: Bag-of-words (BoW)
 
-# Example
+## Example
 
 letitgo.txt
 
@@ -30,11 +30,11 @@ let the storm rage on.
 the cold never bothered me anyway
 ```
 
-# Idea #1: token / tokenization
+## Concept #1: token / tokenization
 
 Smallest unit of analysis. In this case: word
 
-# Example
+### Example
 
 ```
 the quick brown fox jumps over the lazy dog
@@ -46,17 +46,18 @@ Unique tokens: {the,quick,brown,fox,jumps,over,lazy,dog}
 
 Frequency vector: {the: 2, quick: 1, brown: 1, fox: 1, jumps: 1, over: 1, lazy: 1, dog: 1}
 
-# Microtask #1: find all unique tokens in letitgo.txt
+### Microtask #1: find all unique tokens in letitgo.txt
 
 Unix wizardry can do it this way:
 
 ```{bash}
-tr '[:upper:]' '[:lower:]' < letitgo.txt | tr -d "'" |tr -c '[:alnum:]' '[\n*]' | sort | uniq -c | sort -nr
+tr '[:upper:]' '[:lower:]' < letitgo.txt | tr -d "'" |
+tr -c '[:alnum:]' '[\n*]' | sort | uniq -c | sort -nr
 ```
 
 But this is not Hong Kong Linux User Group.
 
-# Basic text manipulation
+#### Basic text manipulation
 
 ```{r}
 readLines("letitgo.txt")
@@ -72,7 +73,16 @@ sort(unique(unlist(strsplit(letitgo2, " "))))
 # BONUS: word frequency
 table(unlist(strsplit(letitgo2, " ")))
 sort(table(unlist(strsplit(letitgo2, " "))))
-# even more BONUS: the use of magrittr
+# BONUS+: the use of magrittr
 require(magrittr)
 letitgo2 %>% strsplit(split= " ") %>% unlist %>% table %>% sort
+# even more extreme version of magrittr pipeline
+# suprisingly similar to the above Unix version
+"letitgo.txt" %>% readLines %>% tolower %>% gsub("[[:punct:]]", "", .) %>% strsplit(split= " ") %>% unlist %>% table %>% sort
 ```
+
+## Concept #2: Corpus & TDM/DTM
+
+[n] a large or complete collection of writings
+
+### 
