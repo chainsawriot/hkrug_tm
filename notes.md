@@ -178,10 +178,10 @@ hackerAttutide %>% strsplit(" ") %>% unlist %>% unique %>% data.frame
 Representation as index
 
 
-| Word | the | world | is | full | of | fascinating | problems | waiting | to | be | solved |
-| ------ | --- | ----- | -- | ---- | --- | ---------- | -------- | ------- | -- | -- | ------ |
-| Index | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
-| Freq | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+Word | the | world | is | full | of | fascinating | problems | waiting | to | be | solved
+------ | --- | ----- | -- | ---- | --- | ---------- | -------- | ------- | -- | -- | ------
+Index | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
+Freq | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1
 
 
 Represent as a 1x28 matrix
