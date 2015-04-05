@@ -46,9 +46,9 @@ Unique tokens: {the,quick,brown,fox,jumps,over,lazy,dog}
 
 Frequency vector: {the: 2, quick: 1, brown: 1, fox: 1, jumps: 1, over: 1, lazy: 1, dog: 1}
 
-### Warmup microtask #1: find all unique tokens in letitgo.txt
+### Warmup microtask #1
 
-Unix wizardry can do it this way:
+find all unique tokens in letitgo.txt. Unix wizardry can do it this way:
 
 ```{bash}
 tr '[:upper:]' '[:lower:]' < letitgo.txt | tr -d "'" |
@@ -85,7 +85,9 @@ letitgo2 %>% strsplit(split= " ") %>% unlist %>% table %>% sort
 
 _Corpus_ [n] a large or complete collection of writings
 
-### Warmup microtask #2: eyeballing a dataset
+### Warmup microtask #2
+
+eyeballing a dataset
 
 extracts.csv: what are the variables in this dataset?
 
@@ -175,7 +177,9 @@ hackerAttutide %>% strsplit(" ") %>% unlist %>% unique %>% data.frame
 28  competence
 ```
 
-Representation as index
+### Represent free text as matrix
+
+Representation 'the world is full of fascinating problems waiting to be solved' as index and do the frequency count
 
 
 Word | the | world | is | full | of | fascinating | problems | waiting | to | be | solved
@@ -183,9 +187,109 @@ Word | the | world | is | full | of | fascinating | problems | waiting | to | be
 Index | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
 Freq | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1
 
-
 Represent as a 1x28 matrix
 
 ```
 [1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 ```
+
+### microtask #3: Representation of free text into matrix
+
+1. Let do this together: "no problem should ever have to be solved twice"
+2. Group work: "boredom and drudery are evil", "freedom is good", "attitude is no subsitute for competence"
+
+### TDM / DTM
+
+DTM == t(TDM)
+
+i.e. row are terms and col is document
+
+### microtask #4
+
+what is the problem of the TDM
+
+### Creation of TDM/DTM
+
+```{r}
+TermDocumentMatrix(Corpus(VectorSource(hackerAttutide)))
+# in case you have so fond of magrittr already
+Corpus(VectorSource(hackerAttutide)) %>% TermDocumentMatrix
+# in case you need a DTM
+DocumentTermMatrix(Corpus(VectorSource(hackerAttutide)))
+Corpus(VectorSource(hackerAttutide)) %>% DocumentTermMatrix
+```
+
+Common pitfalls
+
+1. How to look at it? inspect
+2. wordLengths
+3. work just like a matrix, but not a matrix (but a sparse matrix)
+
+### microtask #5
+
+representation of extracts$enextracts as DocumentTermMatrix and call it enDTM
+
+## Surgery #1: latent dirichlet allocation (LDA)
+
+- Topic model ~ k-mean clustering
+- Articles with similar topic should be cluster together
+- Unsupervised learning
+
+### topic models
+
+We will never get it right the first time
+
+```{r}
+require(topicmodes)
+enLDA <- LDA(enDTM, 2)
+terms(enLDA, 20)
+topics(enLDA)
+extracts$entitles[topics(enLDA) == 2]
+extracts$entitles[topics(enLDA) == 1]
+```
+
+#### microtask #6
+
+Describe the problem of the topic model
+
+#### Diagnose the problem
+
+```{r}
+terms(enLDA, 20)
+colnames(enDTM)
+```
+
+### Potential improvement #1  stopwords
+
+stopwords [n] words which are filtered out before or after processing of natural language data.
+
+e.g. short function words: the, is, at, which....
+
+```{r}
+stopwords('en')
+```
+
+Removal of stopwords from the DTM
+
+```{r}
+DocumentTermMatrix(Corpus(VectorSource(extracts$enextracts)), control=list(stopwords = stopwords('en')))
+```
+
+### Potential improvement #2 punctuation
+
+```{r}
+DocumentTermMatrix(Corpus(VectorSource(extracts$enextracts)), control=list(removePunctuation = TRUE))
+colnames(DocumentTermMatrix(Corpus(VectorSource(extracts$enextracts)), control=list(removePunctuation = TRUE)))
+```
+
+we may want to preserve the intra-word dashes: theorem-proving, third-party
+
+```{r}
+DocumentTermMatrix(Corpus(VectorSource(extracts$enextracts)), control=list(removePunctuation = function(x) removePunctuation(x, preserve_intra_word_dashes = TRUE)))
+```
+
+### Potential improvement #3 stemming
+
+technology, technologies, technological, technologist, technologists
+
+
