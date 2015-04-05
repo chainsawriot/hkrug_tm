@@ -2,7 +2,7 @@
 
 Getting meaningful information from unstructured text
 
-# procedure
+## Procedure
 
 1. collecting data
 2. representation of data
@@ -11,11 +11,11 @@ Getting meaningful information from unstructured text
 5. evaluation
 6. go back to 1-5
 
-# representation of unstructured text in a structured data structure
+## Representation of unstructured text in a structured data structure
 
 Simpliest model: Bag-of-words (BoW)
 
-## Example
+### Example
 
 letitgo.txt
 
@@ -46,7 +46,7 @@ Unique tokens: {the,quick,brown,fox,jumps,over,lazy,dog}
 
 Frequency vector: {the: 2, quick: 1, brown: 1, fox: 1, jumps: 1, over: 1, lazy: 1, dog: 1}
 
-### Microtask #1: find all unique tokens in letitgo.txt
+### Warmup microtask #1: find all unique tokens in letitgo.txt
 
 Unix wizardry can do it this way:
 
@@ -73,7 +73,7 @@ sort(unique(unlist(strsplit(letitgo2, " "))))
 # BONUS: word frequency
 table(unlist(strsplit(letitgo2, " ")))
 sort(table(unlist(strsplit(letitgo2, " "))))
-# BONUS+: the use of magrittr
+# BONUS+: the use of magrittr, read from left to right
 require(magrittr)
 letitgo2 %>% strsplit(split= " ") %>% unlist %>% table %>% sort
 # even more extreme version of magrittr pipeline
@@ -83,6 +83,113 @@ letitgo2 %>% strsplit(split= " ") %>% unlist %>% table %>% sort
 
 ## Concept #2: Corpus & TDM/DTM
 
-[n] a large or complete collection of writings
+_Corpus_ [n] a large or complete collection of writings
 
-### 
+### Warmup microtask #2: eyeballing a dataset
+
+extracts.csv: what are the variables in this dataset?
+
+(1.5 mins)
+
+```{r}
+extracts <- read.csv("extracts.csv", stringsAsFactors = FALSE)
+head(extracts)
+str(extracts)
+#you may use dplyr to override the default stupid behavior of data.frame
+require(dplyr)
+read.csv("extracts.csv", stringsAsFactors = FALSE) %>% tbl_df %>% select(enextracts)
+```
+
+## Introducing the tm packages
+
+Provide two important data structures for text mining
+
+- Corpus (cover just briefly today)
+- TDM/DTM
+
+### Creation of Corpus
+
+```{r}
+require(tm)
+Corpus(VectorSource(extracts$enextracts))
+```
+
+### Corpus data structure
+
+- add meta data (not cover today)
+- an intermediate to TDM/DTM
+
+### TDM/DTM - Term Document Matrix / Document Term Matrix
+
+Example
+
+```
+document #1: the world is full of fascinating problems waiting to be solved
+document #2: no problem should ever have to be solved twice
+document #3: boredom and drudery are evil
+document #4: freedom is good
+document #5: attitude is no subsitute for competence
+```
+
+#### unique tokens
+
+```{r}
+require(magrittr)
+hackerAttutide <- c("the world is full of fascinating problems waiting to be solved",
+"no problem should ever have to be solved twice",
+"boredom and drudery are evil",
+"freedom is good",
+"attitude is no subsitute for competence")
+hackerAttutide %>% strsplit(" ") %>% unlist %>% unique %>% data.frame
+```
+
+```
+    dictionary
+1          the
+2        world
+3           is
+4         full
+5           of
+6  fascinating
+7     problems
+8      waiting
+9           to
+10          be
+11      solved
+12          no
+13     problem
+14      should
+15        ever
+16        have
+17       twice
+18     boredom
+19         and
+20     drudery
+21         are
+22        evil
+23     freedom
+24        good
+25    attitude
+26   subsitute
+27         for
+28  competence
+```
+
+Representation as index
+
+```
+"the world is full of fascinating problems waiting to be solved"
+  1   2    3   4   5       6          7       8    9  10   11
+```
+
+Count the frequency
+
+```
+{1:1,2:1,3:1,4:1,5:1,6:1,7:1,8:1,9:1,10:1,11:1}
+```
+
+Represent as a 1x28 matrix
+
+```
+[1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+```
