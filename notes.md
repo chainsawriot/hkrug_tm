@@ -232,7 +232,7 @@ representation of extracts$enextracts as DocumentTermMatrix and call it enDTM
 ## Surgery #1: latent dirichlet allocation (LDA)
 
 - Topic model ~ k-mean clustering
-- Articles with similar topic should be cluster together
+- Articles with similar topic should be clustered together
 - Unsupervised learning
 
 ### topic models
@@ -290,6 +290,65 @@ DocumentTermMatrix(Corpus(VectorSource(extracts$enextracts)), control=list(remov
 
 ### Potential improvement #3 stemming
 
-technology, technologies, technological, technologist, technologists
+Stemming [n] a process for reducing inflected (or sometimes derived) words to their word stem, base or root form—generally a written word form.
+
+language, languages -> languag
+
+```{r}
+stemDocument("language", "en")
+stemDocument("languages", "en")
+```
+
+```{r}
+DocumentTermMatrix(Corpus(VectorSource(extracts$enextracts)), control=list(stemming = TRUE))
+DocumentTermMatrix(Corpus(VectorSource(extracts$enextracts)), control=list(stemming = function(x) stemDocument(x, "en")))
+```
+
+### Potential improvement #4 remove Sparse Term
+
+```{r}
+apply(enDTM, 2, function(x) sum(x==0)) # number of document with term freq > 0
+```
+
+sparse terms [n] terms occurring only in very few documents
+You may want to remove sparse terms to speed up computation and prevent trapping in local optimization
+
+```{r}
+removeSparseTerms(enDTM, 0.9) #0.9 is the threshold. Only keep terms occur in 90% of documents
+```
+
+- Removal of sparse terms is usually helpful, but of course it is case-by-case.
+- Need to choose the threshold wisely
+- My initial choice usually: (n-3)/n
+
+```{r}
+threshold <- (nrow(enDTM)-3) / nrow(enDTM)
+removeSparseTerms(enDTM, threshold)
+```
+
+### microtask #8
+
+Create a new DTM with stemming, removal of stop words, removal of punctuation and removal of sparse terms, and called it enDTM2
+
+Redo the topic model and see the improvement
+
+## Surgery #2: Auf Wiedersehen
+
+create a LDA model of the entries$deextracts and call it deLDA. Conduct a cross tabulation between topics(enLDA) & topics(deLDA)
+
+Lesson learn:
+
+```
+"A big computer, a complex algorithm and a long time does not equal science." 
+```
+Robert Gentleman (statistician, one 'R' of the two creators of R)
+
+## Surgery #3: Supervised learning
+
+### microtask $9
+
+- read-in spambase.csv
+- inspect the data
+- create a DTM out of the second column (mail)
 
 
