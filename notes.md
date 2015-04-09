@@ -351,4 +351,37 @@ Robert Gentleman (statistician, one 'R' of the two creators of R)
 - inspect the data
 - create a DTM out of the second column (mail)
 
+### Supervised learning
+
+You have the answer!
+
+The label column.
+
+Use the feature in the __mail__ column to predict __label__ .
+
+### Refresher: how to construct a prediction model.
+
+You say you know how to do it, dude!
+
+```{r}
+# logistic regression
+model <- glm(vs~wt+disp, data=mtcars, family = binomial)
+predict(model, type = 'response')
+table(mtcars$vs, predict(model, type = 'response') > 0.5)
+```
+
+### Advance-ish stuff
+
+```{r}
+# Naive bayes
+require(klaR)
+nb <- NaiveBayes(as.factor(vs)~wt+disp, data=mtcars)
+table(predict(nb)$class, mtcars$vs)
+```
+
+### Cross validation
+
+cross validation [n] assesing how the results of a statistical analysis will generalise to an independent data set.
+
+- bias / variance tradeoff
 
