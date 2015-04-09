@@ -351,6 +351,10 @@ Robert Gentleman (statistician, one 'R' of the two creators of R)
 - inspect the data
 - create a DTM out of the second column (mail)
 
+```{r}
+spambase <- read.csv("spambase.csv", stringsAsFactors = FALSE)
+```
+
 ### Supervised learning
 
 You have the answer!
@@ -377,6 +381,9 @@ table(mtcars$vs, predict(model, type = 'response') > 0.5)
 require(klaR)
 nb <- NaiveBayes(as.factor(vs)~wt+disp, data=mtcars)
 table(predict(nb)$class, mtcars$vs)
+require(e1071)
+svmmodel <- svm(as.factor(vs)~wt+disp, data=mtcars)
+table(predict(svmmodel), mtcars$vs)
 ```
 
 ### Cross validation
@@ -385,3 +392,20 @@ cross validation [n] assesing how the results of a statistical analysis will gen
 
 - bias / variance tradeoff
 
+#### Right-er way to do: split the data into training and test set
+
+```{r}
+nrow(mtcars) #32
+
+# 22 rows as training set
+
+training <- sample(1:32, 22)
+require(e1071)
+svmmodelt <- svm(as.factor(vs)~wt+disp, data=mtcars[training,])
+table(predict(svmmodelt), mtcars$vs[training]) # trainingset accuracy
+
+#testset accuracy
+
+table(predict(svmmodelt , newdata = mtcars[]), mtcars$vs[training]) # trainingset accuracy
+table(predict(svmmodelt , newdata = mtcars[-training,]), mtcars$vs[-training])
+```
