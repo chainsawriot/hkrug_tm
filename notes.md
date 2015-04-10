@@ -355,6 +355,10 @@ Robert Gentleman (statistician, one 'R' of the two creators of R)
 spambase <- read.csv("spambase.csv", stringsAsFactors = FALSE)
 ```
 
+SMS spam! : https://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection
+
+http://www.dt.fee.unicamp.br/~tiago/smsspamcollection/doceng11.pdf
+
 ### Supervised learning
 
 You have the answer!
