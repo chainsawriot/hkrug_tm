@@ -413,3 +413,5 @@ table(predict(svmmodelt), mtcars$vs[training]) # trainingset accuracy
 table(predict(svmmodelt , newdata = mtcars[]), mtcars$vs[training]) # trainingset accuracy
 table(predict(svmmodelt , newdata = mtcars[-training,]), mtcars$vs[-training])
 ```
+
+### Try to do the same for spambase data
