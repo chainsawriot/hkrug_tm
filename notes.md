@@ -471,3 +471,4 @@ High bias (underfit): more data, more feature maybe?, 'clever fancy algo'
 
 High variance (overfit): more data may not help, less feature (feature selection), regularization
 
+Reference: http://see.stanford.edu/materials/aimlcs229/ML-advice.pdf
