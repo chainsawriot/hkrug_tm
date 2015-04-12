@@ -345,7 +345,7 @@ Robert Gentleman (statistician, one 'R' of the two creators of R)
 
 ## Surgery #3: Supervised learning
 
-### microtask $9
+### microtask #9
 
 - read-in spambase.csv
 - inspect the data
@@ -434,3 +434,19 @@ require(e1071)
 svmmodel <- svm(x = as.matrix(trainingX), y = as.factor(trainingy))
 predict(svmmodel) # incorrect at all
 ```
+
+You can even get training set correct, it will never get it right on test set.
+
+### microtask #10
+
+No free hunch: How to improve it?
+
+Hints: how to reduce number of features?
+
+### How to evaluate
+
+COL OBS, ROW PRED | TRUE | FALSE
+--- | --- | ---
+TRUE | True Positive | False Positive
+FALSE | False Negative | True Negative
+
