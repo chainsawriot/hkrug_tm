@@ -355,9 +355,9 @@ Robert Gentleman (statistician, one 'R' of the two creators of R)
 spambase <- read.csv("spambase.csv", stringsAsFactors = FALSE)
 ```
 
-SMS spam! : https://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection
+[SMS Spam Collection](https://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection)
 
-http://www.dt.fee.unicamp.br/~tiago/smsspamcollection/doceng11.pdf
+[Almeida et al. Contributions to the study of SMS Spam Filtering: New Collection and Results.](http://www.dt.fee.unicamp.br/~tiago/smsspamcollection/doceng11.pdf)
 
 ### Supervised learning
 
@@ -428,14 +428,26 @@ caveats:
 training <- sample(1:5574, 3902)
 # or
 # training <- sample(1:nrow(spamdtm), floor(nrow(spamdtm) * 0.7))
+
+# it maybe a good idea to save your random sample fo reproducibility
+# saveRDS(training, "trainingtest.RDS")
+
 trainingX <- spamdtm[training,]
 trainingy <- spambase$label[training]
 require(e1071)
 svmmodel <- svm(x = as.matrix(trainingX), y = as.factor(trainingy))
-predict(svmmodel) # incorrect at all
+predict(svmmodel) # incorrect at all for training set
+table(predict(svmmodel), trainingy)
+
+# testset evaluation
+
+testX <- spamdtm[-training,]
+testy <- spambase$label[-training]
+predict(svmmodel, as.matrix(testX))
+table(predict(svmmodel, as.matrix(testX)), testy)
 ```
 
-You can even get training set correct, it will never get it right on test set.
+You can't even get your prediction on training set correct, it will never get it right on test set.
 
 ### microtask #10
 
@@ -467,8 +479,8 @@ Training set Low F1 | Fluke | High bias
 
 The goal: Similar (high) F1 for both training set and test set
 
-High bias (underfit): more data, more feature maybe?, 'clever fancy algo'
+High bias / underfit: more data (maybe N-Gram tokenization), more feature maybe?, 'clever fancy algo'
 
-High variance (overfit): more data may not help, less feature (feature selection), regularization
+High variance / overfit: more data may not help, less feature (feature selection, feature extraction), regularization
 
-Reference: http://see.stanford.edu/materials/aimlcs229/ML-advice.pdf
+Reference: [Andrew Ng. Advice for applying Machine Learning](http://see.stanford.edu/materials/aimlcs229/ML-advice.pdf)
