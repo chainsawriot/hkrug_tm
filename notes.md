@@ -461,7 +461,7 @@ You can't use Accuracy: (TP + TN) / (TP + TN + FP + FN) for this, why?
 ### Bias Variance trade off
 
 F1 | Test set High F1 | Test set Low F1
--- | ---- | ---
+--- | ---- | ---
 Training set High F1 | Nice | High Variance
 Training set Low F1 | Fluke | High bias
 
