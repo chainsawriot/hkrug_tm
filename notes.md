@@ -443,10 +443,31 @@ No free hunch: How to improve it?
 
 Hints: how to reduce number of features?
 
-### How to evaluate
+### How to evaluate?
 
 COL OBS, ROW PRED | TRUE | FALSE
 --- | --- | ---
 TRUE | True Positive | False Positive
 FALSE | False Negative | True Negative
+
+Recall (Sensitivity): TP / (TP + FN)
+
+Precision (Positive Predictive value, PPV): TP / (TP + FP)
+
+F1 score = harmonic mean of Precision & Recall = (2 * TP) / (2 * TP + (FP + FN))
+
+You can't use Accuracy: (TP + TN) / (TP + TN + FP + FN) for this, why?
+
+### Bias Variance trade off
+
+F1 | Test set High F1 | Test set Low F1
+-- | ---- | ---
+Training set High F1 | Nice! | High Variance (Overfit)
+Training set Low F1 | Fluke! | High bias (Underfit)
+
+The goal: Similar (high) F1 for both training set and test set
+
+High bias: more data, more feature maybe?, 'clever fancy algo'
+
+High variance: more data may not help, less feature (feature selection), regularization
 
