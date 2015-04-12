@@ -414,4 +414,23 @@ table(predict(svmmodelt , newdata = mtcars[]), mtcars$vs[training]) # trainingse
 table(predict(svmmodelt , newdata = mtcars[-training,]), mtcars$vs[-training])
 ```
 
-### Try to do the same for spambase data
+### Try to do the SVM for spambase data
+
+Creating training-test split and see
+
+caveats:
+
+- svm can accept (x = mat, y = y)
+- for the DocumentTermMatrix, you need to as.matrix to make it a normal matrix. (stupid!)
+
+```{r}
+# suppose you already have a dtm called spamdtm
+training <- sample(1:5574, 3902)
+# or
+# training <- sample(1:nrow(spamdtm), floor(nrow(spamdtm) * 0.7))
+trainingX <- spamdtm[training,]
+trainingy <- spambase$label[training]
+require(e1071)
+svmmodel <- svm(x = as.matrix(trainingX), y = as.factor(trainingy))
+predict(svmmodel) # incorrect at all
+```
