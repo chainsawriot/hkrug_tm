@@ -462,12 +462,12 @@ You can't use Accuracy: (TP + TN) / (TP + TN + FP + FN) for this, why?
 
 F1 | Test set High F1 | Test set Low F1
 -- | ---- | ---
-Training set High F1 | Nice! | High Variance (Overfit)
-Training set Low F1 | Fluke! | High bias (Underfit)
+Training set High F1 | Nice | High Variance
+Training set Low F1 | Fluke | High bias
 
 The goal: Similar (high) F1 for both training set and test set
 
-High bias: more data, more feature maybe?, 'clever fancy algo'
+High bias (underfit): more data, more feature maybe?, 'clever fancy algo'
 
-High variance: more data may not help, less feature (feature selection), regularization
+High variance (overfit): more data may not help, less feature (feature selection), regularization
 
