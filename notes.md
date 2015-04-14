@@ -479,7 +479,7 @@ Training set Low F1 | Fluke | High bias
 
 The goal: Similar (high) F1 for both training set and test set
 
-High bias / underfit: more data (maybe N-Gram tokenization), more feature maybe?, 'clever fancy algo'
+High bias / underfit: more data, more feature (maybe N-Gram tokenization) maybe?, 'clever fancy algo'
 
 High variance / overfit: more data may not help, less feature (feature selection, feature extraction), regularization
 
