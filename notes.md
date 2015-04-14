@@ -421,7 +421,7 @@ Creating training-test split and see
 caveats:
 
 - svm can accept (x = mat, y = y)
-- for the DocumentTermMatrix, you need to as.matrix to make it a normal matrix. (stupid!)
+- for the DocumentTermMatrix, you need to as.matrix to make it a normal matrix. (stupid!) [1]
 
 ```{r}
 # suppose you already have a dtm called spamdtm
@@ -484,3 +484,7 @@ High bias / underfit: more data, more feature (maybe N-Gram tokenization) maybe?
 High variance / overfit: more data may not help, less feature (feature selection, feature extraction), regularization
 
 Reference: [Andrew Ng. Advice for applying Machine Learning](http://see.stanford.edu/materials/aimlcs229/ML-advice.pdf)
+
+[1]: actually, the e1071::svm can accept sparse matrix such as DocumentTermMatrix (which is a Triplet Sparse Matrix format from the slam package) as the X argument but you cannot scale the features in sparse matrix. You may try svm(x = trainingX, y = as.factor(trainingy)) but the accuracy is very bad because the features are not scaled. BTW, scaling in SVM means centering the feature to zero mean and unit variance.
+
+
