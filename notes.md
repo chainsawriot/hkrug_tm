@@ -394,7 +394,7 @@ table(predict(svmmodel), mtcars$vs)
 
 cross validation [n] assesing how the results of a statistical analysis will generalise to an independent data set.
 
-- bias / variance tradeoff
+- Bias-variance tradeoff
 
 #### Right-er way to do: split the data into training and test set
 
@@ -470,7 +470,7 @@ F1 score = harmonic mean of Precision & Recall = (2 * TP) / (2 * TP + (FP + FN))
 
 You can't use Accuracy: (TP + TN) / (TP + TN + FP + FN) for this, why?
 
-### Bias Variance trade off
+### Bias-variance tradeoff
 
 F1 | Test set High F1 | Test set Low F1
 --- | ---- | ---
