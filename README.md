@@ -22,7 +22,7 @@ table(kmeans(iris[,1:4], 3)$cluster, iris[,5])
 You should be running R > 3.0 and your preferred editor. (RStudio/emacs/vim/sublime) Please install the required R packages
 
 ```{r}
-install.packages(c("tm", "stringr", "plyr", "topicmodels", "snowballC", "magrittr", "klaR", "e1071"))
+install.packages(c("tm", "stringr", "plyr", "topicmodels", "SnowballC", "magrittr", "klaR", "e1071"))
 ```
 
 For those who are using Linux, you need to install GNU scientific library to compile the "topicmodels" library. If you are using Debian/Ubuntu, you can install GNU scientific library by:
