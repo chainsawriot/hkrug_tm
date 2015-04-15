@@ -25,3 +25,8 @@ You should be running R > 3.0 and your preferred editor. (RStudio/emacs/vim/subl
 install.packages(c("tm", "stringr", "plyr", "topicmodels", "snowballC", "magrittr", "klaR", "e1071"))
 ```
 
+For those who are using Linux, you need to install GNU scientific library to compile the "topicmodels" library. If you are using Debian/Ubuntu, you can install GNU scientific library by:
+
+```
+sudo apt-get install libgsl0ldbl libgsl0-dev
+```
