@@ -468,7 +468,7 @@ Precision (Positive Predictive value, PPV): TP / (TP + FP)
 
 F1 score = harmonic mean of Precision & Recall = (2 * TP) / (2 * TP + (FP + FN))
 
-You can't use Accuracy: (TP + TN) / (TP + TN + FP + FN) for this, why?
+You shouldn't use Accuracy: (TP + TN) / (TP + TN + FP + FN) for this, why?
 
 ### Bias-variance tradeoff
 
