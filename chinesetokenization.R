@@ -29,3 +29,4 @@ on9dtm <- DocumentTermMatrix(Corpus(VectorSource(on92)), control = list(wordLeng
 apply(on9dtm, 2, sum) %>% sort %>% tail(40) # a lot of redundancy
 
 ## experimental: https://github.com/chainsawriot/tdmcleanrr
+## or use mRMR (minimum redundancy and maximum relevance feature selection)

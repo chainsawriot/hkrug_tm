@@ -137,12 +137,12 @@ document #5: attitude is no subsitute for competence
 
 ```{r}
 require(magrittr)
-hackerAttutide <- c("the world is full of fascinating problems waiting to be solved",
+hackerAttitude <- c("the world is full of fascinating problems waiting to be solved",
 "no problem should ever have to be solved twice",
 "boredom and drudery are evil",
 "freedom is good",
 "attitude is no subsitute for competence")
-hackerAttutide %>% strsplit(" ") %>% unlist %>% unique %>% data.frame
+hackerAttitude %>% strsplit(" ") %>% unlist %>% unique %>% data.frame
 ```
 
 ```
