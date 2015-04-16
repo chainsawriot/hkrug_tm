@@ -211,12 +211,12 @@ what is the problem of the TDM
 ### Creation of TDM/DTM
 
 ```{r}
-TermDocumentMatrix(Corpus(VectorSource(hackerAttutide)))
+TermDocumentMatrix(Corpus(VectorSource(hackerAttitude)))
 # in case you have so fond of magrittr already
-Corpus(VectorSource(hackerAttutide)) %>% TermDocumentMatrix
+Corpus(VectorSource(hackerAttitude)) %>% TermDocumentMatrix
 # in case you need a DTM
-DocumentTermMatrix(Corpus(VectorSource(hackerAttutide)))
-Corpus(VectorSource(hackerAttutide)) %>% DocumentTermMatrix
+DocumentTermMatrix(Corpus(VectorSource(hackerAttitude)))
+Corpus(VectorSource(hackerAttitude)) %>% DocumentTermMatrix
 ```
 
 Common pitfalls
